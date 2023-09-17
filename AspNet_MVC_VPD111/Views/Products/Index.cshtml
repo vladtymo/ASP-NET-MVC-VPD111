@@ -1,0 +1,46 @@
+﻿@using AspNet_MVC_VPD111.Data.Entities;
+@model List<Product>;
+
+<h1>Product Manage Panel</h1>
+<p>You can manage the available products here...</p>
+
+<p>Count: @Model.Count</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Category</th>
+            <th scope="col">Status</th>
+            <th scope="col">Discount</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            <tr class="align-middle">
+                <th scope="row">@i.Id</th>
+                <td>@i.Name</td>
+                <td>@i.Price$</td>
+                <td>@i.CategoryId</td>
+                <td>
+                    @if(i.InStock)
+                    {
+                        <span class="badge bg-success">In Stock</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Out of Stock</span>
+                    }
+                </td>
+                <td>@(i.Discount ?? 0)%</td>
+                <td>
+                    <button type="button" class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
