@@ -36,7 +36,11 @@
                 </td>
                 <td>@(i.Discount ?? 0)%</td>
                 <td>
-                    <a asp-action="Delete" asp-route-id="@i.Id" class="btn btn-danger">Delete</a>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a asp-action="Show" asp-route-id="@i.Id" class="btn btn-secondary">Show</a>
+                        <a asp-action="Delete" asp-route-id="@i.Id" class="btn btn-danger">Delete</a>
+                    </div>
+                   
                 </td>
             </tr>
         }
