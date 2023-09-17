@@ -15,5 +15,18 @@ namespace AspNet_MVC_VPD111.Controllers
 
             return View(products);
         }
+
+        // delete product by ID
+        public IActionResult Delete(int id)
+        {
+            var item = ctx.Products.Find(id);
+
+            if (item == null) return NotFound();
+
+            ctx.Products.Remove(item);
+            ctx.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
     }
 }
