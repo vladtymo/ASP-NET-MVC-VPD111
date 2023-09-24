@@ -16,6 +16,12 @@ namespace AspNet_MVC_VPD111.Controllers
             return View(products);
         }
 
+        // GET: show create product page
+        public IActionResult Create()
+        {
+            return View();
+        }
+
         // delete product by ID
         public IActionResult Delete(int id)
         {
