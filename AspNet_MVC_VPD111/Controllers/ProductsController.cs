@@ -16,6 +16,16 @@ namespace AspNet_MVC_VPD111.Controllers
             return View(products);
         }
 
+        // GET: show product details page
+        public IActionResult Details(int id)
+        {
+            var item = ctx.Products.Find(id);
+
+            if (item == null) return NotFound();
+
+            return View(item);
+        }
+
         // GET: show create product page
         [HttpGet]
         public IActionResult Create()
