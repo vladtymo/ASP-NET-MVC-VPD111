@@ -17,9 +17,21 @@ namespace AspNet_MVC_VPD111.Controllers
         }
 
         // GET: show create product page
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
+        }
+
+        // POST: create product
+        [HttpPost]
+        public IActionResult Create(Product product)
+        {
+            // create product in database
+            ctx.Products.Add(product);
+            ctx.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
         }
 
         // delete product by ID
@@ -32,7 +44,7 @@ namespace AspNet_MVC_VPD111.Controllers
             ctx.Products.Remove(item);
             ctx.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
     }
 }
