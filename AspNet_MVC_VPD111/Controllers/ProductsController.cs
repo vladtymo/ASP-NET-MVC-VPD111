@@ -1,12 +1,20 @@
 ﻿using AspNet_MVC_VPD111.Data;
 using AspNet_MVC_VPD111.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AspNet_MVC_VPD111.Controllers
 {
     public class ProductsController : Controller
     {
         Shop111DbContext ctx = new Shop111DbContext();
+
+        private void LoadCategories()
+        {
+            ViewBag.Categories = new SelectList(ctx.Categories.ToList(), 
+                                                nameof(Category.Id), 
+                                                nameof(Category.Name));
+        }
 
         public IActionResult Index()
         {
@@ -30,6 +38,12 @@ namespace AspNet_MVC_VPD111.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            // Ways of transfering data to View
+            // 1 - using View(model)
+            // 2 - using TempData: this.TempData["key"] = value
+            // 3 - using ViewBag: this.ViewBag.Property = value
+            LoadCategories();
+
             return View();
         }
 
@@ -39,6 +53,7 @@ namespace AspNet_MVC_VPD111.Controllers
         {
             if (!ModelState.IsValid)
             {
+                LoadCategories();
                 return View(product);
             }
 
@@ -57,6 +72,8 @@ namespace AspNet_MVC_VPD111.Controllers
 
             if (item == null) return NotFound();
 
+            LoadCategories();
+
             return View(item);
         }
 
@@ -66,6 +83,7 @@ namespace AspNet_MVC_VPD111.Controllers
         {
             if (!ModelState.IsValid)
             {
+                LoadCategories();
                 return View(product);
             }
 

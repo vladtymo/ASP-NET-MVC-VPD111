@@ -20,18 +20,16 @@
         <textarea asp-for="Description" class="form-control" rows="3" placeholder="Enter description"></textarea>
     </div>
 
-    <div class="col-md-6">
+    @* <div class="col-md-6">
         <label asp-for="CategoryId" class="form-label">Category ID</label>
         <input asp-for="CategoryId" type="number" class="form-control" placeholder="Enter category ID">
-    </div>
-
-    @*  <div class="col-md-4">
-    <label for="inputState" class="form-label">State</label>
-    <select id="inputState" class="form-select">
-    <option selected>Choose...</option>
-    <option>...</option>
-    </select>
     </div> *@
+    <div class="col-md-6">
+        <label asp-for="CategoryId" class="form-label">State</label>
+        <select asp-for="CategoryId" asp-items="@ViewBag.Categories" id="inputState" class="form-select">
+            <option disabled selected>Choose category...</option>
+        </select>
+    </div>
 
     <div class="col-md-6">
         <label asp-for="ImageUrl" class="form-label">Image URL</label>
