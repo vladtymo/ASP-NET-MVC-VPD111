@@ -49,6 +49,33 @@ namespace AspNet_MVC_VPD111.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // GET: show updte product page
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var item = ctx.Products.Find(id);
+
+            if (item == null) return NotFound();
+
+            return View(item);
+        }
+
+        // POST: update product
+        [HttpPost]
+        public IActionResult Edit(Product product)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(product);
+            }
+
+            // create product in database
+            ctx.Products.Update(product);
+            ctx.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
         // delete product by ID
         public IActionResult Delete(int id)
         {
