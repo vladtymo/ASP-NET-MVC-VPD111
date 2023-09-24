@@ -27,6 +27,11 @@ namespace AspNet_MVC_VPD111.Controllers
         [HttpPost]
         public IActionResult Create(Product product)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(product);
+            }
+
             // create product in database
             ctx.Products.Add(product);
             ctx.SaveChanges();
