@@ -1,5 +1,5 @@
-﻿using AspNet_MVC_VPD111.Data;
-using AspNet_MVC_VPD111.Data.Entities;
+﻿using DataAccess.Data;
+using DataAccess.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 

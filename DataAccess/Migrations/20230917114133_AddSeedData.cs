@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace AspNet_MVC_VPD111.Migrations
+namespace DataAccess.Migrations
 {
     public partial class AddSeedData : Migration
     {

@@ -1,4 +1,4 @@
-﻿namespace AspNet_MVC_VPD111.Data.Entities
+﻿namespace DataAccess.Data.Entities
 {
     public class Category
     {
