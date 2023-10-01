@@ -7,7 +7,12 @@ namespace AspNet_MVC_VPD111.Controllers
 {
     public class ProductsController : Controller
     {
-        Shop111DbContext ctx = new Shop111DbContext();
+        private readonly Shop111DbContext ctx;
+
+        public ProductsController(Shop111DbContext ctx) // Dependency Injection
+        {
+            this.ctx = ctx;
+        }
 
         private void LoadCategories()
         {

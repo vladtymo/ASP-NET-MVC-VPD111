@@ -1,7 +1,15 @@
+using DataAccess.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Data.Common;
+
 var builder = WebApplication.CreateBuilder(args);
+
+string connStr = builder.Configuration.GetConnectionString("LocalDb");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<Shop111DbContext>(opts => opts.UseSqlServer(connStr));
 
 var app = builder.Build();
 
