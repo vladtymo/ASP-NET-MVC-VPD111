@@ -1,4 +1,5 @@
 ﻿using AspNet_MVC_VPD111.Models;
+using DataAccess.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -6,16 +7,18 @@ namespace AspNet_MVC_VPD111.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController()
+        private readonly Shop111DbContext ctx;
+
+        public HomeController(Shop111DbContext ctx)
         {
-          
+            this.ctx = ctx;
         }
 
         public IActionResult Index()
         {
             // get data from DB, validations and etc...
             // ... code ...
-            return this.View(); // ~/Views/Home/Index.cshtml
+            return this.View(ctx.Products.ToList()); // ~/Views/Home/Index.cshtml
         }
 
         public IActionResult Privacy()
