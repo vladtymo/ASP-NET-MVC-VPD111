@@ -6,22 +6,22 @@ namespace DataAccess.Data.Entities
     {
         public int Id { get; set; }
 
-        [Required]
-        [MaxLength(100)]
+        //[Required]
+        //[MaxLength(100)]
         public string Name { get; set; }
 
-        [Range(0, int.MaxValue)]
+        //[Range(0, int.MaxValue)]
         public decimal Price { get; set; }
 
-        [Url]
+        //[Url]
         public string? ImageUrl { get; set; }
         public int CategoryId { get; set; }
 
-        [Range (0, 100)]
+        //[Range (0, 100)]
         public int? Discount { get; set; }
         public bool InStock { get; set; }
 
-        [StringLength(1000, MinimumLength = 10)]
+        //[StringLength(1000, MinimumLength = 10)]
         public string? Description { get; set; }
 
         // ---------- navigation properties
