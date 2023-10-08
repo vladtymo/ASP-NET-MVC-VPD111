@@ -1,10 +1,12 @@
 ﻿using DataAccess.Data;
 using DataAccess.Data.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AspNet_MVC_VPD111.Controllers
 {
+    [Authorize] // allow authorized users only
     public class ProductsController : Controller
     {
         private readonly Shop111DbContext ctx;
