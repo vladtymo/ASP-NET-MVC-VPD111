@@ -18,7 +18,9 @@ namespace AspNet_MVC_VPD111.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var items = ctx.Orders.Where(x => x.UserId == CurrentUserId).ToList();
+
+            return View(items);
         }
 
         public IActionResult Create()
@@ -36,6 +38,9 @@ namespace AspNet_MVC_VPD111.Controllers
 
             ctx.Orders.Add(order);
             ctx.SaveChanges();
+
+            // cleat cart items
+            HttpContext.Session.Remove("cart_items");
 
             return RedirectToAction("Index", "Home");
         }

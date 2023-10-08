@@ -1,0 +1,10 @@
+﻿@using DataAccess.Data.Entities;
+@model List<Order>
+
+<h1>My Order History</h1>
+<ul class="list-group">
+    @foreach (var i in Model)
+    {
+        <li class="list-group-item">[@i.Id] - @i.TotalPrice$ - @i.Date</li>
+    }
+</ul>
