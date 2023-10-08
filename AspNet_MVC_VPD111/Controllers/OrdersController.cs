@@ -1,11 +1,13 @@
 ﻿using AspNet_MVC_VPD111.Helpers;
 using DataAccess.Data;
 using DataAccess.Data.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace AspNet_MVC_VPD111.Controllers
 {
+    [Authorize] // allow authorized users only
     public class OrdersController : Controller
     {
         private readonly Shop111DbContext ctx;

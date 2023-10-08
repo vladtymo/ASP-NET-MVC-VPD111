@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AspNet_MVC_VPD111.Controllers
 {
-    [Authorize] // allow authorized users only
+    //[Authorize]
     public class ProductsController : Controller
     {
         private readonly Shop111DbContext ctx;
