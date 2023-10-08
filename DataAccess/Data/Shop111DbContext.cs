@@ -1,9 +1,10 @@
 ﻿using DataAccess.Data.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Data
 {
-    public class Shop111DbContext : DbContext
+    public class Shop111DbContext : IdentityDbContext
     {
         public Shop111DbContext() { }
         public Shop111DbContext(DbContextOptions options) : base(options) { }
@@ -12,7 +13,7 @@ namespace DataAccess.Data
         {
             base.OnConfiguring(optionsBuilder);
 
-            //optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ShopVPDDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
+            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ShopVPDDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
