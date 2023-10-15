@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
 using Microsoft.AspNetCore.Identity;
 using DataAccess.Data.Entities;
+using AspNet_MVC_VPD111.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,12 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<Shop111DbContext>(opts => opts.UseSqlServer(connStr));
 
-builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+    {
+        options.SignIn.RequireConfirmedAccount = false;
+    })
+    .AddDefaultTokenProviders()
+    .AddDefaultUI()
     .AddEntityFrameworkStores<Shop111DbContext>();
 
 // add FluentValidator with validation classes
@@ -33,6 +39,18 @@ builder.Services.AddSession(options =>
 
 var app = builder.Build();
 
+// identity roles and admin user initialization
+using (IServiceScope scope = app.Services.CreateScope())
+{
+    var serviceProvider = scope.ServiceProvider;
+
+    // seed roles
+    SeedExtensions.SeedRoles(serviceProvider).Wait();
+
+    // seed admin
+    SeedExtensions.SeedAdmin(serviceProvider).Wait();
+}
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -45,8 +63,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication();;
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseSession();

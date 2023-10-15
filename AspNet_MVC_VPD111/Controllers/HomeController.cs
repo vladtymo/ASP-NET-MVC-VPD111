@@ -1,5 +1,7 @@
 ﻿using AspNet_MVC_VPD111.Models;
 using DataAccess.Data;
+using DataAccess.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
