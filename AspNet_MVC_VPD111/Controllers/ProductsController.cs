@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AspNet_MVC_VPD111.Controllers
 {
-    //[Authorize]
+    [Authorize(Roles = "Admin")]
     public class ProductsController : Controller
     {
         private readonly Shop111DbContext ctx;
@@ -23,6 +23,7 @@ namespace AspNet_MVC_VPD111.Controllers
                                                 nameof(Category.Name));
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             // get data from the database
