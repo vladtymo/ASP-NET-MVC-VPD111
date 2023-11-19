@@ -1,4 +1,6 @@
-﻿using DataAccess.Data;
+﻿using AspNet_MVC_VPD111.Helpers;
+using AspNet_MVC_VPD111.Models;
+using DataAccess.Data;
 using DataAccess.Data.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +12,12 @@ namespace AspNet_MVC_VPD111.Controllers
     public class ProductsController : Controller
     {
         private readonly Shop111DbContext ctx;
+        private readonly IFileService fileService;
 
-        public ProductsController(Shop111DbContext ctx) // Dependency Injection
+        public ProductsController(Shop111DbContext ctx, IFileService fileService) // Dependency Injection
         {
             this.ctx = ctx;
+            this.fileService = fileService;
         }
 
         private void LoadCategories()
@@ -57,13 +61,24 @@ namespace AspNet_MVC_VPD111.Controllers
 
         // POST: create product
         [HttpPost]
-        public IActionResult Create(Product product)
+        public async Task<IActionResult> Create(CreateProductModel model)
         {
             if (!ModelState.IsValid)
             {
                 LoadCategories();
-                return View(product);
+                return View(model);
             }
+
+            var product = new Product()
+            {
+                Name = model.Name,
+                Description = model.Description,
+                CategoryId = model.CategoryId,
+                Discount = model.Discount,
+                InStock = model.InStock,
+                Price = model.Price,
+                ImageUrl = await fileService.SaveFileAsync(model.ImageFile)
+            };
 
             // create product in database
             ctx.Products.Add(product);
