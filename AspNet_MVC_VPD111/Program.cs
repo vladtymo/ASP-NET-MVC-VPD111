@@ -28,7 +28,8 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddScoped<IFileService, LocalFileService>();
+//builder.Services.AddScoped<IFileService, LocalFileService>();
+builder.Services.AddScoped<IFileService, AzureFileService>();
 
 builder.Services.AddDistributedMemoryCache();
 
